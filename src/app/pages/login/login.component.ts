@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  loginInvalid = false;
   regexEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -22,12 +23,15 @@ export class LoginComponent {
   });
 
   login() {
+    this.formLogin.markAsTouched();
     if (
       this.form['email'].value === 'test@test.com' &&
       this.form['password'].value === '123456'
     ) {
       localStorage.setItem('isLogin', 'true');
       this.router.navigate(['/home']);
+    } else {
+      this.loginInvalid = true;
     }
   }
 
