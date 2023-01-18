@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ComponentsModule } from '../components/components.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ComponentsModule } from '../components/components.module';
     PostComponent,
     FormularioComponent,
   ],
-  imports: [CommonModule, ComponentsModule],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule],
   exports: [LoginComponent, HomeComponent, PostComponent, FormularioComponent],
 })
 export class PagesModule {}
