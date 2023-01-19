@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { regexEmail } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginInvalid = false;
-  regexEmail =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
   formLogin = this.fb.group({
     email: [
       'test@test.com',
-      [Validators.required, Validators.pattern(this.regexEmail)],
+      [Validators.required, Validators.pattern(regexEmail)],
     ],
     password: ['123456', [Validators.required, Validators.minLength(6)]],
   });

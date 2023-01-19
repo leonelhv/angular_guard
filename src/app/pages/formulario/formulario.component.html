@@ -1,1 +1,261 @@
 <app-header></app-header>
+<div class="w-3/4 mx-auto">
+  <form
+    [formGroup]="contactForm"
+    class="p-6 bg-white rounded-lg"
+    (submit)="enviarDatos()"
+    novalidate
+  >
+    <h2 class="mb-4 text-2xl font-medium">Contact Form</h2>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="name">
+        Name
+      </label>
+      <input
+        class="w-full p-2 border border-gray-400"
+        type="text"
+        id="name"
+        name="name"
+        formControlName="name"
+        [ngClass]="campoNoValido('name') ? 'border-red-600' : ''"
+      />
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['name']?.errors?.['required'] && form['name'].touched"
+        >
+          Ingresa tu nombre.
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="email">
+        Email
+      </label>
+      <input
+        class="w-full p-2 border border-gray-400"
+        type="email"
+        id="email"
+        name="email"
+        formControlName="email"
+        [ngClass]="campoNoValido('email') ? 'border-red-600' : ''"
+      />
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['email']?.errors?.['required'] && form['email'].touched"
+        >
+          Ingresa tu dirección de correo electrónico.
+        </p>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['email']?.errors?.['pattern'] && form['email'].touched"
+        >
+          Este correo electrónico no es válido. Asegúrate de que tenga un
+          formato como este: ejemplo@email.com
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="phone">
+        Phone
+      </label>
+      <input
+        class="w-full p-2 border border-gray-400"
+        type="tel"
+        id="phone"
+        name="phone"
+        formControlName="phone"
+        [ngClass]="campoNoValido('phone') ? 'border-red-600' : ''"
+      />
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['phone']?.errors?.['required'] && form['phone'].touched"
+        >
+          Ingresa tu número de teléfono.
+        </p>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['phone']?.errors?.['pattern'] && form['phone'].touched"
+        >
+          Este télefono no tiene el formato correcto ejemplo:985858558
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="message">
+        Message
+      </label>
+      <textarea
+        class="w-full p-2 border border-gray-400"
+        id="message"
+        name="message"
+        rows="5"
+        formControlName="message"
+        [ngClass]="campoNoValido('message') ? 'border-red-600' : ''"
+      ></textarea>
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['message']?.errors?.['required'] && form['message'].touched"
+        >
+          Ingrese un mensaje.
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="age">Age</label>
+      <input
+        class="w-full p-2 border border-gray-400"
+        type="number"
+        id="age"
+        name="age"
+        formControlName="age"
+        [ngClass]="campoNoValido('age') ? 'border-red-600' : ''"
+      />
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['age']?.errors?.['required'] && form['age'].touched"
+        >
+          Ingresa su edad.
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700">Gender</label>
+      <div class="flex items-center">
+        <input
+          class="mr-2"
+          type="radio"
+          id="male"
+          name="gender"
+          value="male"
+          formControlName="gender"
+        />
+        <label for="male">Male</label>
+        <input
+          class="ml-4 mr-2"
+          type="radio"
+          id="female"
+          name="gender"
+          value="female"
+          formControlName="gender"
+        />
+        <label for="female">Female</label>
+      </div>
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['gender']?.errors?.['required'] && form['gender'].touched"
+        >
+          Escoga un género.
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700">Hobbies</label>
+      <div class="flex items-center gap-4">
+        <div *ngFor="let hobby of hobbies">
+          <input
+            class="mr-2"
+            type="checkbox"
+            [id]="hobby.name"
+            [name]="hobby.name"
+            [value]="hobby.value"
+            (change)="onCheckboxChange($event, 'hobbies')"
+          />
+          <label [for]="hobby.name">{{ hobby.name }}</label>
+        </div>
+        <div>
+          <p
+            class="text-sm text-red-600"
+            *ngIf="form['hobbies']?.errors?.['required'] && form['hobbies'].untouched"
+          >
+            Seleccione como mínimo 1 hobby
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="country"
+        >Country</label
+      >
+      <select
+        class="w-full p-2 border border-gray-400"
+        id="country"
+        name="country"
+        formControlName="country"
+      >
+        <option value="">Select a country</option>
+        <option value="Argentina">Argentina</option>
+        <option value="Chile">Chile</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Peru">Peru</option>
+      </select>
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['country']?.errors?.['required'] && form['country'].touched"
+        >
+          Eliga un país.
+        </p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700">Education</label>
+      <div class="flex items-center gap-4">
+        <div *ngFor="let edu of education">
+          <input
+            class="mr-2"
+            type="checkbox"
+            [id]="edu.name"
+            [name]="edu.name"
+            [value]="edu.value"
+            (change)="onCheckboxChange($event, 'education')"
+          />
+          <label [for]="edu.name">{{ edu.name }}</label>
+        </div>
+        <div>
+          <p
+            class="text-sm text-red-600"
+            *ngIf="form['education']?.errors?.['required'] && form['education'].untouched"
+          >
+            Eliga la educación que tiene.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2 font-medium text-gray-700" for="occupation"
+        >Occupation</label
+      >
+      <input
+        class="w-full p-2 border border-gray-400"
+        type="text"
+        id="occupation"
+        name="occupation"
+        formControlName="occupation"
+        [ngClass]="campoNoValido('occupation') ? 'border-red-600' : ''"
+      />
+      <div>
+        <p
+          class="text-sm text-red-600"
+          *ngIf="form['occupation']?.errors?.['required'] && form['occupation'].touched"
+        >
+          Ingrese su ocupación.
+        </p>
+      </div>
+    </div>
+
+    <button
+      [disabled]="contactForm.invalid"
+      type="submit"
+      class="p-2 text-white bg-indigo-300 rounded-lg"
+      [ngClass]="{ 'bg-indigo-600': contactForm.valid }"
+    >
+      Submit
+    </button>
+  </form>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticateGuard } from './guards/authenticate.guard';
+import { CanDeactiveGuard } from './guards/canDeactive.guard';
 import { FormularioComponent } from './pages/formulario/formulario.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     path: 'formulario',
     component: FormularioComponent,
     canActivate: [AuthGuard],
+    canDeactivate: [CanDeactiveGuard],
   },
   {
     path: 'home',
