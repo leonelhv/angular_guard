@@ -6,6 +6,8 @@ import { PostComponent } from './post/post.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ComponentsModule } from '../components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MainComponent } from './main/main.component';
+import { RouterOutlet } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     PostComponent,
     FormularioComponent,
+    MainComponent,
   ],
-  imports: [CommonModule, ComponentsModule, ReactiveFormsModule],
-  exports: [LoginComponent, HomeComponent, PostComponent, FormularioComponent],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule, RouterOutlet],
+  exports: [
+    LoginComponent,
+    HomeComponent,
+    PostComponent,
+    FormularioComponent,
+    MainComponent,
+  ],
 })
 export class PagesModule {}
