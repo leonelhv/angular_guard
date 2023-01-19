@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -14,6 +15,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     PagesModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
