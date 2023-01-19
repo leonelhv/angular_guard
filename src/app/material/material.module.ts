@@ -5,8 +5,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 const materialComponents = [
   MatButtonModule,
@@ -14,8 +18,12 @@ const materialComponents = [
   MatIconModule,
   MatInputModule,
   MatFormFieldModule,
-  MatSnackBarModule,
   MatTabsModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatSelectModule,
 ];
 
 @NgModule({

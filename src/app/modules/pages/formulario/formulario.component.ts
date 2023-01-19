@@ -18,21 +18,11 @@ import Swal from 'sweetalert2';
 export class FormularioComponent implements CanDeactivate<any> {
   constructor(private fb: FormBuilder) {}
 
-  hobbies: Array<any> = [
-    { name: 'Reading', value: 'reading' },
-    { name: 'Traveling', value: 'traveling' },
-    { name: 'Gaming', value: 'gaming' },
-  ];
-  education: Array<any> = [
-    { name: 'High School', value: 'high_school' },
-    { name: 'College', value: 'college' },
-    { name: 'Grad School', value: 'grad_school' },
-  ];
-
   onCheckboxChange(e: any, groupCheckbox: string) {
     const checkArray: FormArray = this.contactForm.get(
       groupCheckbox
     ) as FormArray;
+
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
     } else {
@@ -54,9 +44,9 @@ export class FormularioComponent implements CanDeactivate<any> {
     message: ['', [Validators.required]],
     age: ['', [Validators.required]],
     gender: ['', [Validators.required]],
-    hobbies: this.fb.array([], [Validators.required]),
+    dni: [[], [Validators.required, Validators.minLength(8)]],
     country: ['', [Validators.required]],
-    education: this.fb.array([], [Validators.required]),
+    education: ['', [Validators.required]],
     occupation: ['', [Validators.required]],
   });
 
@@ -64,12 +54,6 @@ export class FormularioComponent implements CanDeactivate<any> {
     return this.contactForm.controls;
   }
 
-  campoNoValido(campo: string) {
-    return (
-      this.contactForm.get(campo)?.invalid &&
-      this.contactForm.get(campo)?.touched
-    );
-  }
   enviarDatos() {
     this.contactForm.reset();
   }

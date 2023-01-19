@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   constructor(private router: Router) {}
-
+  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
+    window.location.host
+  );
   logout() {
     localStorage.clear();
     this.router.navigate(['/auth/login']);

@@ -1,265 +1,136 @@
-<div class="w-3/4 mx-auto">
-  <form
-    [formGroup]="contactForm"
-    #formCon="ngForm"
-    class="p-6 bg-white rounded-lg"
-    (submit)="enviarDatos()"
-    novalidate
-  >
-    <h2 class="mb-4 text-2xl font-medium">Contact Form</h2>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="name">
-        Name
-      </label>
-      <input
-        class="w-full p-2 border border-gray-400"
-        type="text"
-        id="name"
-        name="name"
-        formControlName="name"
-        [ngClass]="campoNoValido('name') ? 'border-red-600' : ''"
-      />
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['name']?.errors?.['required'] && form['name'].touched"
-        >
-          Ingresa tu nombre.
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="email">
-        Email
-      </label>
-      <input
-        class="w-full p-2 border border-gray-400"
-        type="email"
-        id="email"
-        name="email"
-        formControlName="email"
-        [ngClass]="campoNoValido('email') ? 'border-red-600' : ''"
-      />
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['email']?.errors?.['required'] && form['email'].touched"
-        >
-          Ingresa tu dirección de correo electrónico.
-        </p>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['email']?.errors?.['pattern'] && form['email'].touched"
-        >
-          Este correo electrónico no es válido. Asegúrate de que tenga un
-          formato como este: ejemplo@email.com
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="phone">
-        Phone
-      </label>
-      <input
-        class="w-full p-2 border border-gray-400"
-        type="tel"
-        id="phone"
-        name="phone"
-        formControlName="phone"
-        [ngClass]="campoNoValido('phone') ? 'border-red-600' : ''"
-      />
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['phone']?.errors?.['required'] && form['phone'].touched"
-        >
-          Ingresa tu número de teléfono.
-        </p>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['phone']?.errors?.['pattern'] && form['phone'].touched"
-        >
-          Este télefono no tiene el formato correcto ejemplo:985858558
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="message">
-        Message
-      </label>
-      <textarea
-        class="w-full p-2 border border-gray-400"
-        id="message"
-        name="message"
-        rows="5"
-        formControlName="message"
-        [ngClass]="campoNoValido('message') ? 'border-red-600' : ''"
-      ></textarea>
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['message']?.errors?.['required'] && form['message'].touched"
-        >
-          Ingrese un mensaje.
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="age">Age</label>
-      <input
-        class="w-full p-2 border border-gray-400"
-        type="number"
-        id="age"
-        name="age"
-        formControlName="age"
-        [ngClass]="campoNoValido('age') ? 'border-red-600' : ''"
-      />
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['age']?.errors?.['required'] && form['age'].touched"
-        >
-          Ingresa su edad.
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700">Gender</label>
-      <div class="flex items-center">
-        <input
-          class="mr-2"
-          type="radio"
-          id="male"
-          name="gender"
-          value="male"
-          formControlName="gender"
-        />
-        <label for="male">Male</label>
-        <input
-          class="ml-4 mr-2"
-          type="radio"
-          id="female"
-          name="gender"
-          value="female"
-          formControlName="gender"
-        />
-        <label for="female">Female</label>
-      </div>
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['gender']?.errors?.['required'] && form['gender'].touched"
-        >
-          Escoga un género.
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700">Hobbies</label>
-      <div class="flex items-center gap-4">
-        <div *ngFor="let hobby of hobbies">
-          <input
-            class="mr-2"
-            type="checkbox"
-            [id]="hobby.name"
-            [name]="hobby.name"
-            [value]="hobby.value"
-            (change)="onCheckboxChange($event, 'hobbies')"
-          />
-          <label [for]="hobby.name">{{ hobby.name }}</label>
-        </div>
-        <div>
-          <p
-            class="text-sm text-red-600"
-            *ngIf="form['hobbies']?.errors?.['required'] && form['hobbies'].untouched"
-          >
-            Seleccione como mínimo 1 hobby
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="country"
-        >Country</label
-      >
-      <select
-        class="w-full p-2 border border-gray-400"
-        id="country"
-        name="country"
-        formControlName="country"
-      >
-        <option value="">Select a country</option>
-        <option value="Argentina">Argentina</option>
-        <option value="Chile">Chile</option>
-        <option value="Colombia">Colombia</option>
-        <option value="Peru">Peru</option>
-      </select>
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['country']?.errors?.['required'] "
-        >
-          Eliga un país.
-        </p>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700">Education</label>
-      <div class="flex items-center gap-4">
-        <div *ngFor="let edu of education">
-          <input
-            class="mr-2"
-            type="checkbox"
-            [id]="edu.name"
-            [name]="edu.name"
-            [value]="edu.value"
-            (change)="onCheckboxChange($event, 'education')"
-          />
-          <label [for]="edu.name">{{ edu.name }}</label>
-        </div>
-        <div>
-          <p
-            class="text-sm text-red-600"
-            *ngIf="form['education']?.errors?.['required'] && form['education'].untouched"
-          >
-            Eliga la educación que tiene.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="mb-4">
-      <label class="block mb-2 font-medium text-gray-700" for="occupation"
-        >Occupation</label
-      >
-      <input
-        class="w-full p-2 border border-gray-400"
-        type="text"
-        id="occupation"
-        name="occupation"
-        formControlName="occupation"
-        [ngClass]="campoNoValido('occupation') ? 'border-red-600' : ''"
-      />
-      <div>
-        <p
-          class="text-sm text-red-600"
-          *ngIf="form['occupation']?.errors?.['required'] && form['occupation'].touched"
-        >
-          Ingrese su ocupación.
-        </p>
-      </div>
-    </div>
-
-    <button
-      [disabled]="contactForm.invalid"
-      type="submit"
-      class="p-2 text-white bg-indigo-300 rounded-lg"
-      [ngClass]="{ 'bg-indigo-600': contactForm.valid }"
+<h2>Formulario de Contacto</h2>
+<form [formGroup]="contactForm" (submit)="enviarDatos()" #formCon="ngForm">
+  <mat-form-field>
+    <mat-label>Nombres</mat-label>
+    <input matInput type="text" formControlName="name" />
+    <mat-error
+      *ngIf="form['name']?.errors?.['required'] && form['name'].touched"
     >
-      Submit
-    </button>
-  </form>
+      Ingresa tu nombre
+    </mat-error>
+  </mat-form-field>
 
-  <div *ngIf="formCon.submitted && contactForm.valid">
-    <pre>{{ contactForm.value | json }} </pre>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error
+      *ngIf="form['email']?.errors?.['required'] && form['email'].touched"
+    >
+      Ingresa tu email
+    </mat-error>
+    <mat-error
+      *ngIf="form['email']?.errors?.['pattern'] && form['email'].touched"
+    >
+      Ingrese un email válido (e.g. example@email.com).
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Teléfono</mat-label>
+    <input matInput type="tel" formControlName="phone" />
+    <mat-error
+      *ngIf="form['phone']?.errors?.['required'] && form['phone'].touched"
+    >
+      Ingrese su número de teléfono.
+    </mat-error>
+    <mat-error
+      *ngIf="form['phone']?.errors?.['pattern'] && form['phone'].touched"
+    >
+      Por favor ingresar un número telefonico válido (e.g. 985858558).
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input matInput type="number" formControlName="age" required />
+    <mat-error *ngIf="form['age']?.errors?.['required'] && form['age'].touched">
+      Edad es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-full">
+    <mat-label>DNI</mat-label>
+    <input matInput formControlName="dni" />
+    <mat-error *ngIf="form['dni']?.errors?.['required'] && form['dni'].touched"
+      >DNI is required</mat-error
+    >
+    <mat-error *ngIf="form['dni']?.errors?.['pattern'] && form['dni'].touched"
+      >Invalid DNI format</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field class="w-full">
+    <mat-label>País</mat-label>
+    <mat-select formControlName="country" required>
+      <mat-option value="">Seleccione un país</mat-option>
+      <mat-option value="Argentina">Argentina</mat-option>
+      <mat-option value="Chile">Chile</mat-option>
+      <mat-option value="Colombia">Colombia</mat-option>
+      <mat-option value="Perú">Perú</mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="form['country']?.errors?.['required'] && form['country'].touched"
+      >Country is required</mat-error
+    >
+  </mat-form-field>
+
+  <div>
+    <label>Educación</label>
+    <mat-radio-group formControlName="education">
+      <mat-radio-button class="mr-2" value="primaria"
+        >Primaria</mat-radio-button
+      >
+      <mat-radio-button class="ml-4 mr-2" value="secundaria"
+        >Secundaria</mat-radio-button
+      >
+      <mat-radio-button class="ml-4 mr-2" value="universidad"
+        >Universidad</mat-radio-button
+      >
+    </mat-radio-group>
+    <mat-error *ngIf="form['education']?.errors?.['required'] ">
+      Por favor escoja una educación
+    </mat-error>
   </div>
+
+  <mat-form-field class="w-full">
+    <mat-label>Ocupación</mat-label>
+    <input matInput formControlName="occupation" required />
+    <mat-error *ngIf="form['occupation']?.errors?.['required'] "
+      >Escriba su ocupación</mat-error
+    >
+  </mat-form-field>
+  <div>
+    <label>Género</label>
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button class="mr-2" value="male">Hombre</mat-radio-button>
+      <mat-radio-button class="ml-4 mr-2" value="female"
+        >Mujer</mat-radio-button
+      >
+    </mat-radio-group>
+    <mat-error *ngIf="form['gender']?.errors?.['required'] ">
+      Por favor selecciona un género
+    </mat-error>
+  </div>
+  <mat-form-field class="double-column">
+    <mat-label>Mensaje</mat-label>
+    <textarea matInput rows="5" formControlName="message"></textarea>
+    <mat-error
+      *ngIf="form['message']?.errors?.['required'] && form['message'].touched"
+    >
+      Por favor ingresar un mensaje.
+    </mat-error>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="contactForm.invalid"
+    class="btn_submit"
+  >
+    Enviar
+  </button>
+</form>
+
+<div *ngIf="formCon.submitted && contactForm.valid">
+  <pre>{{ contactForm.value | json }} </pre>
 </div>

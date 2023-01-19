@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { RouterOutlet } from '@angular/router';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ReactiveFormsModule,
     RouterOutlet,
     ComponentsModule,
+    MaterialModule,
   ],
   exports: [MainComponent],
 })
