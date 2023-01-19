@@ -10,6 +10,7 @@ import { regexEmail } from 'src/app/utils/constants';
 })
 export class LoginComponent {
   loginInvalid = false;
+  hide = true;
 
   constructor(private fb: FormBuilder, private router: Router) {}
 
@@ -38,9 +39,16 @@ export class LoginComponent {
     return this.formLogin.controls;
   }
 
-  campoNoValido(campo: string) {
-    return (
-      this.formLogin.get(campo)?.invalid && this.formLogin.get(campo)?.touched
-    );
+  getErrorMessage(control: string) {
+    if (this.form[control].hasError('required')) {
+      return `El ${control} es requerido`;
+    }
+    if (control == 'email' && this.form[control].hasError('pattern')) {
+      return 'No es un email válido';
+    }
+    if (control == 'password' && this.form[control].hasError('minlength')) {
+      return 'El password es mínimo de 6 caracteres';
+    }
+    return null;
   }
 }

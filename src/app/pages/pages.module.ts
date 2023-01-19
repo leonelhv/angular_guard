@@ -8,6 +8,7 @@ import { ComponentsModule } from '../components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { RouterOutlet } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,13 @@ import { RouterOutlet } from '@angular/router';
     FormularioComponent,
     MainComponent,
   ],
-  imports: [CommonModule, ComponentsModule, ReactiveFormsModule, RouterOutlet],
+  imports: [
+    CommonModule,
+    ComponentsModule,
+    ReactiveFormsModule,
+    RouterOutlet,
+    MaterialModule,
+  ],
   exports: [
     LoginComponent,
     HomeComponent,
