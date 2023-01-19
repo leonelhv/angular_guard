@@ -71,14 +71,24 @@ export class FormularioComponent implements CanDeactivate<any> {
     );
   }
   enviarDatos() {
-    console.log(this.contactForm);
+    this.contactForm.reset();
   }
 
   canDeactivate(): boolean | Promise<boolean> {
+    let invalidControls = 0;
+    for (const control in this.contactForm.controls) {
+      if (this.form[control].invalid) {
+        invalidControls++;
+      }
+    }
+
     if (this.contactForm.dirty) {
       return Swal.fire({
         title: 'Estas seguro?',
-        text: 'Tienes cambios sin guardar en el formulario',
+        text:
+          invalidControls > 0
+            ? `Tienes ${invalidControls} campos en el formulario sin rellenar`
+            : 'Estas seguro de salir sin guardar tu Formulario',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Si, salir',

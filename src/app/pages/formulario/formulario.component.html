@@ -1,6 +1,7 @@
 <div class="w-3/4 mx-auto">
   <form
     [formGroup]="contactForm"
+    #formCon="ngForm"
     class="p-6 bg-white rounded-lg"
     (submit)="enviarDatos()"
     novalidate
@@ -196,7 +197,7 @@
       <div>
         <p
           class="text-sm text-red-600"
-          *ngIf="form['country']?.errors?.['required'] && form['country'].touched"
+          *ngIf="form['country']?.errors?.['required'] "
         >
           Eliga un país.
         </p>
@@ -257,4 +258,8 @@
       Submit
     </button>
   </form>
+
+  <div *ngIf="formCon.submitted && contactForm.valid">
+    <pre>{{ contactForm.value | json }} </pre>
+  </div>
 </div>
