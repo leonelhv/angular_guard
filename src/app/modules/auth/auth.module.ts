@@ -6,15 +6,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent, MainComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
   ],
-  exports: [LoginComponent],
+  exports: [MainComponent],
 })
 export class AuthModule {}

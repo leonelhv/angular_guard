@@ -1,47 +1,30 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { regexEmail } from 'src/app/utils/constants';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
-export class LoginComponent implements OnDestroy {
-  loginInvalid = false;
-  hide = true;
-  failLogin = false;
-  timeoutId: any;
-
+export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService
   ) {}
 
-  formLogin = this.fb.group({
+  hide = true;
+
+  formRegister = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(regexEmail)]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  login() {
-    this.userService
-      .login(this.formLogin.value)
-      .then((res) => {
-        this.router.navigate(['home']);
-      })
-      .catch((error) => {
-        this.failLogin = true;
-        this.timeoutId = setTimeout(() => {
-          this.failLogin = false;
-        }, 3000);
-      });
-  }
-
   get form(): { [key: string]: AbstractControl } {
-    return this.formLogin.controls;
+    return this.formRegister.controls;
   }
 
   getErrorMessage(control: string) {
@@ -56,9 +39,13 @@ export class LoginComponent implements OnDestroy {
     }
     return null;
   }
-  ngOnDestroy(): void {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+
+  register() {
+    this.userService
+      .registerUser(this.formRegister.value)
+      .then((res) => {
+        this.router.navigate(['home']);
+      })
+      .catch((error) => console.log(error));
   }
 }

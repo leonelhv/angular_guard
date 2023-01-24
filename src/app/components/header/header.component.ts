@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
-  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
-    window.location.host
-  );
+  constructor(private userService: UserService) {}
+
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/auth/login']);
+    this.userService.logout();
   }
 }

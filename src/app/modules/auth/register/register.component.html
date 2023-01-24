@@ -1,5 +1,4 @@
-<form [formGroup]="formLogin" (submit)="login()">
-  <h3 *ngIf="failLogin" class="error_login my-6">Credenciales Incorrectas</h3>
+<form [formGroup]="formRegister" (submit)="register()">
   <mat-form-field class="mt-10 full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input
@@ -34,10 +33,7 @@
       getErrorMessage("password")
     }}</mat-error>
   </mat-form-field>
-  <button mat-button color="primary" [disabled]="formLogin.invalid">
-    Login
+  <button mat-button color="primary" [disabled]="formRegister.invalid">
+    Registrarse
   </button>
-  <p class="error_login" *ngIf="loginInvalid">
-    Nombre de usuario o contraseña incorrectos.
-  </p>
 </form>
